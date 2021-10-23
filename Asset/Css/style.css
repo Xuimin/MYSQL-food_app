@@ -1,0 +1,131 @@
+/* ALL */
+* {
+    font-family: 'sogoe print';
+    font-family: 'Kalam';
+}
+
+
+/* BACKGROUND */
+#background-image {
+    background-image: url('../Image/food-background.jpg'), linear-gradient(to right bottom, rgba(255, 255, 255, 0.507), rgba(255, 255, 224, 0.76), rgba(255, 217, 0, 0.288));
+    background-blend-mode: overlay;
+    padding: 200px 0 250px 0;
+    background-position: center;
+    background-size: cover;
+    z-index: 1;
+}
+body {
+    background-image: url('../Image/background1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+/* FORM Label color */
+label.active {
+    color: orangered !important;
+}
+
+/* FORM input line color */
+input:focus {
+    border-bottom: 1px solid orange !important;
+    box-shadow: 0 1px 0 0 orange !important;
+}
+.input-field input[type=text].valid {
+    border-bottom: 1px solid orange !important;
+    box-shadow: 0 1px 0 0 orange !important;
+}
+textarea {
+    border-bottom: 1px solid orange !important;
+    box-shadow: 0 1px 0 0 orange !important;
+}
+
+
+/* ALL BUTTON COLOR */
+button.btn {
+    background-color: rgb(253, 179, 43);
+}
+button.btn:hover {
+    background-color: rgb(255, 202, 103);
+}
+
+/* ALL LINK COLOR */
+a.btn {
+    background-color: rgb(253, 179, 43);
+}
+a.btn:hover {
+    background-color: rgb(255, 202, 103);
+}
+/* FORM option font color */
+.select-wrapper .select-dropdown span {
+    color: violet !important;
+}
+.select-wrapper .select-dropdown .selected span{
+    color: purple !important;
+}
+
+
+div.row {
+    margin: 0px;
+}
+
+
+.card {
+    background-color: rgba(253, 253, 190, 0.637);;
+}
+
+ul.collection li.collection-item {
+    background-color: rgba(253, 199, 49, 0.404);
+}
+
+div#heart-bg {
+    background-image: url('../Image/fav-bg.png');
+    background-size: cover;
+}
+
+div.collection {
+    background-color: rgba(253, 253, 190, 0.637);;
+}
+
+
+/* ICONS COLORS */
+a .material-icons {
+    color: red;
+}
+
+/* LINK */
+a {
+    color: darkred;
+}
+
+
+/* FOOTER */
+footer li {
+    list-style-type: none;
+}
+footer li a {
+    color: white;
+}
+footer li a:hover {
+    color: rgb(253, 221, 160);
+    transition: 0.3s ease-in;
+}
+
+
+/* SOCIAL MEDIA ICONS */
+.fa {
+    padding: 10px;
+    font-size: 15px;
+    width: 35px;
+    border-radius: 50%;
+    text-align: center;
+    text-decoration: none;
+    background-color: rgb(252, 174, 29);
+    color: white;
+}
+.fa:hover {
+    opacity: 0.7;
+}
+
+
+
