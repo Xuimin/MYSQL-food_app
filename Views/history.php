@@ -11,7 +11,7 @@
         FROM orders 
         JOIN users ON orders.user_id = users.id
         JOIN transactions ON orders.transaction_id = transactions.id
-        WHERE isDone = 1
+        WHERE is_done = 1
         AND users.id = {$_SESSION['user_data']['id']}";
         $result = mysqli_query($cn, $query);
         $items = mysqli_fetch_all($result, MYSQLI_ASSOC);

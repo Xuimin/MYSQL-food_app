@@ -12,7 +12,7 @@
         $time = date('H:i:s');
         $user_id = $_SESSION['user_data']['id'];
 
-        $query = "UPDATE transactions SET isPaid = 1, date = '$date', time = '$time' WHERE id = $id";
+        $query = "UPDATE transactions SET is_paid = 1, date = '$date', time = '$time' WHERE id = $id";
         mysqli_query($cn, $query);
 
         $query2 = "INSERT INTO orders (transaction_id, user_id) VALUES ($id, $user_id)";
@@ -31,7 +31,7 @@
 
         $id = $_GET['id'];
 
-        $query = "UPDATE transactions SET isDeleted = 1 WHERE id = $id";
+        $query = "UPDATE transactions SET is_deleted = 1 WHERE id = $id";
         mysqli_query($cn, $query);
 
         mysqli_close($cn);

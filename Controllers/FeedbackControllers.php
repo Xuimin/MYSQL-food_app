@@ -29,7 +29,7 @@
 
         $id = $_GET['id'];
 
-        $query = "UPDATE feedback SET isRead = 1 WHERE id = $id";
+        $query = "UPDATE feedback SET is_read = 1 WHERE id = $id";
         mysqli_query($cn, $query);
 
         mysqli_close($cn);

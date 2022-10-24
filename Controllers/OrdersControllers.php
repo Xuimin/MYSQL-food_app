@@ -20,7 +20,7 @@
             header('Location: ' . $_SERVER['HTTP_REFERER']);
         } 
         if($errors === 0) {
-            $query = "UPDATE orders SET foodStatus_id = $status_id WHERE id = $id";
+            $query = "UPDATE orders SET food_status_id = $status_id WHERE id = $id";
             mysqli_query($cn, $query);
 
             mysqli_close($cn);
@@ -36,7 +36,7 @@
 
         $id = $_GET['id'];
         
-        $query = "UPDATE orders SET isDone = 1 WHERE transaction_id = $id";
+        $query = "UPDATE orders SET is_done = 1 WHERE transaction_id = $id";
         mysqli_query($cn, $query);
 
         mysqli_close($cn);

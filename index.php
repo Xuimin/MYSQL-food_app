@@ -78,7 +78,7 @@
     
 <div class="container">
     <!-- POST FOOD BUTTON (ADMIN) -->
-    <?php if(isset($_SESSION['user_data']) && $_SESSION['user_data']['isAdmin'] == 1): ?>
+    <?php if(isset($_SESSION['user_data']) && $_SESSION['user_data']['is_admin'] == 1): ?>
     <a href="#add_food" 
     class="btn modal-trigger" 
     style="margin-top: 20px">Add Food</a>
@@ -181,7 +181,7 @@
     <?php endif; ?>
 
     <!-- OPEN / CLOSE SHOP (ADMIN) -->
-    <?php if(isset($_SESSION['user_data']) && $_SESSION['user_data']['isAdmin']): ?>
+    <?php if(isset($_SESSION['user_data']) && $_SESSION['user_data']['is_admin']): ?>
         <a href="/web.php?action=shop_status&id=<?php echo $shop['shop_status']?>" 
         class="btn"
         style="margin-top: 20px">
@@ -235,7 +235,7 @@
         ?>
 
         <?php foreach($foods as $food): ?>
-            <?php if($food['isDeleted'] == 0): ?>
+            <?php if($food['is_deleted'] == 0): ?>
             <div class="col s12">
                 <div class="divider grey lighten-1"></div>
                 <div class="section">
@@ -243,7 +243,7 @@
                         <h5 style="display: inline"><?php echo $food['name'] ;?></h5>
                         
                         <!-- ADD TO FAV (USER) -->
-                        <?php if(isset($_SESSION['user_data']) && !$_SESSION['user_data']['isAdmin']): ?>
+                        <?php if(isset($_SESSION['user_data']) && !$_SESSION['user_data']['is_admin']): ?>
 
                             <a href="/web.php?action=favorite&id=<?php echo $food['id']?>">
                                 <i class="tiny material-icons">favorite_border</i>
@@ -251,7 +251,7 @@
                             
                             <?php foreach($favs as $fav): ?>
                                 <?php if($fav['food_id'] == $food['id'] && $fav['user_id'] == $_SESSION['user_data']['id']) : ?>
-                                    <?php if($fav['isDeleted'] == 1): ?>
+                                    <?php if($fav['is_deleted'] == 1): ?>
                                     <a href="/web.php?action=favorite&id=<?php echo $food['id']?>">
                                         <i class="material-icons">favorite_border</i>
                                     </a> 
@@ -283,7 +283,7 @@
                         </small>
 
                         <!-- QUANTITY -->
-                        <?php if(isset($_SESSION['user_data']) && !$_SESSION['user_data']['isAdmin']): ?>
+                        <?php if(isset($_SESSION['user_data']) && !$_SESSION['user_data']['is_admin']): ?>
                         <form action="/web.php" method="POST">
 
                             <input type="hidden" name="action" value="add_to_cart">
@@ -291,22 +291,26 @@
                             <input type="hidden" name="id" value="<?php echo $food['id']; ?>">
 
                             <input type="hidden" name="price" value="<?php echo $food['price'];?>">
-
-                            <div class="input-field" style="margin-bottom: 0">
-                                <input type="number"
-                                name="quantity"
-                                id="quantity"
-                                min="1"
-                                max="10"
-                                value="1"
-                                class="col s2">
-                                <label for="quantity"
-                                class="purple-text">Quantity</label>         
-                            </div>
+                            
+                            <?php if($food['is_available'] == 1): ?>
+                                <div class="input-field" style="margin-bottom: 0">
+                                    <input type="number"
+                                    name="quantity"
+                                    id="quantity"
+                                    min="1"
+                                    max="10"
+                                    value="1"
+                                    class="col s2">
+                                    <label for="quantity"
+                                    class="purple-text">Quantity</label>         
+                                </div>
+                            <?php else: ?>
+                                <b style="color: red">Sorry, not available right not!</b>
+                            <?php endif; ?>
 
                             <br>
 
-                            <?php if($food['isAvailable'] == 1): ?>
+                            <?php if($food['is_available'] == 1): ?>
                             <button style="font-size: 2px; border: none; background-color: transparent; color: blue; margin-bottom: 10px"
                             class="right">
                             Add to Cart
@@ -322,14 +326,14 @@
 
                     <div class="right">
 
-                        <?php if(isset($_SESSION['user_data']) && $_SESSION['user_data']['isAdmin']): ?>
+                        <?php if(isset($_SESSION['user_data']) && $_SESSION['user_data']['is_admin']): ?>
                         <div class="switch" style="margin-bottom: 10px">
                             <form action="/web.php"
                             method="POST">
                                 <input type="hidden" name="id" value="<?php echo $food['id']?>">
 
                                 <input type="hidden" name="action" value="isAvailable">
-                                <?php if($food['isAvailable'] == 1): ?>
+                                <?php if($food['is_available'] == 1): ?>
                                 <label>
                                     N/Available
                                     <input type="checkbox" name="isAvailable" checked>
@@ -337,7 +341,7 @@
                                     Available
                                 </label>
                                 <?php endif; ?>
-                                <?php if($food['isAvailable'] == 0): ?>
+                                <?php if($food['is_available'] == 0): ?>
                                 <label>
                                     N/Available
                                     <input type="checkbox" name="isAvailable">

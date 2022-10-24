@@ -69,7 +69,7 @@
             } 
         }
         if($errors === 0) {
-            $query = "INSERT INTO foods (name, description, image, price, category_id, isAvailable)
+            $query = "INSERT INTO foods (name, description, image, price, category_id, is_available)
             VALUES ('$name', '$description', '$image', $price, $category_id, $isAvailable)";
 
             mysqli_query($cn, $query);
@@ -118,7 +118,7 @@
         // var_dump($id);
         // die();
 
-        $query = "UPDATE foods SET isDeleted = 1 WHERE id = $id";
+        $query = "UPDATE foods SET is_deleted = 1 WHERE id = $id";
         mysqli_query($cn, $query);
         mysqli_close($cn);
 
@@ -203,7 +203,7 @@
             $carts = mysqli_fetch_all($result2, MYSQLI_ASSOC);
 
             foreach($carts as $cart) {
-                $query3 = "UPDATE cart SET totalPayment = {$cart['quantity']} * $price WHERE food_id = $id";
+                $query3 = "UPDATE cart SET total_payment = {$cart['quantity']} * $price WHERE food_id = $id";
                 mysqli_query($cn, $query3);
             }
             // var_dump($query3);
@@ -243,13 +243,13 @@
         // $isAvailable = $request['isAvailable']; // on(Available)
 
         if(!isset($request['isAvailable'])){
-            $query = "UPDATE foods SET isAvailable = 0 WHERE id = $id";
+            $query = "UPDATE foods SET is_available = 0 WHERE id = $id";
             mysqli_query($cn, $query);
             mysqli_close($cn);
             header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
         if(isset($request['isAvailable'])) {
-            $query = "UPDATE foods SET isAvailable = 1 WHERE id = $id";
+            $query = "UPDATE foods SET is_available = 1 WHERE id = $id";
             mysqli_query($cn, $query);
             mysqli_close($cn);
             header('Location: ' . $_SERVER['HTTP_REFERER']);

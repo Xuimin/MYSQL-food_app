@@ -27,7 +27,7 @@
             header('Location: /');
         }
         if($errors === 0) {
-            $query = "INSERT INTO cart (user_id, food_id, quantity, totalPayment)
+            $query = "INSERT INTO cart (user_id, food_id, quantity, total_payment)
             VALUES ($user_id, $food_id, $quantity, $payment)";
             mysqli_query($cn, $query);
             mysqli_close($cn);
@@ -63,7 +63,7 @@
         // var_dump($id);
         // die();
 
-        $query = "UPDATE cart SET isDeleted = 1 WHERE id = $id";
+        $query = "UPDATE cart SET is_deleted = 1 WHERE id = $id";
         mysqli_query($cn, $query);
         mysqli_close($cn);
         
@@ -90,14 +90,14 @@
         // var_dump($payment);
         // die();
 
-        $query = "UPDATE transactions SET isDeleted = 1 WHERE user_id = {$_SESSION['user_data']['id']} ";
+        $query = "UPDATE transactions SET is_deleted = 1 WHERE user_id = {$_SESSION['user_data']['id']} ";
         mysqli_query($cn, $query);
 
         $query2 = "INSERT INTO transactions (user_id, item, payment) 
         VALUES ($id,'$namestring', $payment)";
         mysqli_query($cn, $query2);
 
-        $query3 = "UPDATE cart SET toPay = 1 WHERE user_id = {$_SESSION['user_data']['id']}";
+        $query3 = "UPDATE cart SET to_pay = 1 WHERE user_id = {$_SESSION['user_data']['id']}";
         mysqli_query($cn, $query3);
 
         mysqli_close($cn);

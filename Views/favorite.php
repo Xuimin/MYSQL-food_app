@@ -13,7 +13,7 @@
         JOIN foods ON favorite.food_id = foods.id
         JOIN categories ON foods.category_id = categories.id
         WHERE favorite.user_id = {$_SESSION['user_data']['id']} 
-        AND favorite.isDeleted = 0";
+        AND favorite.is_deleted = 0";
         $result = mysqli_query($cn, $query);
         $fav_foods = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
@@ -28,6 +28,8 @@
                 <a href='/'> << Go Back to Homepage </a>
             </div>
             ";
+        } else {
+            
         }
 ?>
 
@@ -43,7 +45,7 @@
 
     <div class="row">
         <?php foreach($fav_foods as $fav): ?>
-            <?php if($fav['isDeleted'] == 0): ?>
+            <?php if($fav['is_deleted'] == 0): ?>
                 <div class="col s6 l4">
                     <!-- SHOW FAVORITE -->
                     <div class="card" 

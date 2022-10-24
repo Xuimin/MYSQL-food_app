@@ -36,7 +36,7 @@
                 <a href="../web.php?id=<?php echo $feedback['feedback_id']?>&action=read" 
                 class="right">
                     <?php   
-                        if($feedback['isRead'] == 0) {
+                        if($feedback['is_read'] == 0) {
                             echo 'Mark as read' . '<i class="material-icons right">markunread</i>';
                         } else {
                             echo 'Read' . '<i class="material-icons right">check</i>';

@@ -7,11 +7,11 @@
             header('Location: /');
         }
         
-        $query = "SELECT orders.*, orders.id AS order_id, transactions.*, transactions.id AS transaction_id, status.id AS status_id, status.foodStatus, users.id, users.username
+        $query = "SELECT orders.*, orders.id AS order_id, transactions.*, transactions.id AS transaction_id, status.id AS status_id, status.food_status, users.id, users.username
         FROM orders
         JOIN users ON orders.user_id = users.id
         JOIN transactions ON orders.transaction_id = transactions.id
-        JOIN status ON orders.foodStatus_id = status.id
+        JOIN status ON orders.food_status_id = status.id
         ORDER BY orders.id DESC";
         $result = mysqli_query($GLOBALS['cn'], $query);
         $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -49,9 +49,9 @@
                 
                 <div class="col s6">
                     <!-- UPDATE STATUS (ADMIN) -->
-                    <?php if(isset($_SESSION['user_data']) && $_SESSION['user_data']['isAdmin']): ?>
+                    <?php if(isset($_SESSION['user_data']) && $_SESSION['user_data']['is_admin']): ?>
                         <form action="../web.php" method="POST">
-                            <?php if($item['isDone'] == 0): ?>
+                            <?php if($item['is_done'] == 0): ?>
                                 <button class="btn right" style="margin-top: 20px"><i class="material-icons">autorenew</i></button>
                             <?php endif; ?>
         
@@ -59,13 +59,13 @@
         
                             <input type="hidden" name="id" value="<?php echo $item['order_id']?>">
         
-                            <?php if($item['isDone'] == 0): ?>
+                            <?php if($item['is_done'] == 0): ?>
                             <div class="input-field col s8 right">
                                 <select name="status_id">
-                                    <option value="<?php echo $item['status_id']?>" disabled selected><?php echo $item['foodStatus']; ?></option>
+                                    <option value="<?php echo $item['status_id']?>" disabled selected><?php echo $item['food_status']; ?></option>
             
                                     <?php foreach($statuss as $status): ?>
-                                    <option value="<?php echo $status['id'];?>"><?php echo $status['foodStatus']?></option>
+                                    <option value="<?php echo $status['id'];?>"><?php echo $status['food_status']?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -77,22 +77,22 @@
                     <div style="margin: 20px">
                         <p class="center-align right
                         <?php 
-                        if($item['foodStatus_id'] == 1) {
+                        if($item['food_status_id'] == 1) {
                             echo 'red lighten-3';
-                        } elseif($item['foodStatus_id'] == 2) {
+                        } elseif($item['food_status_id'] == 2) {
                             echo 'orange lighten-3';
-                        } elseif($item['foodStatus_id'] == 3) {
+                        } elseif($item['food_status_id'] == 3) {
                             echo 'yellow lighten-3';
                         } else {
                             echo 'green lighten-3';
                         }
                         ?>" 
-                        style="border: 1px dotted black; margin: 0 0 10px 0;padding: 5px"><?php echo $item['foodStatus'] ?></p>
+                        style="border: 1px dotted black; margin: 0 0 10px 0;padding: 5px"><?php echo $item['food_status'] ?></p>
                     </div>
                 </div>
 
                 <!-- SET ORDER COMPLETED (ADMIN) -->
-                <?php if($item['foodStatus_id'] == 4 && $item['isDone'] == 0): ?>
+                <?php if($item['food_status_id'] == 4 && $item['is_done'] == 0): ?>
                     <a href="../web.php?id=<?php echo $item['transaction_id']?>&action=complete"
                     class="right btn red-text" 
                     style="margin: 0 10px 10px 0">

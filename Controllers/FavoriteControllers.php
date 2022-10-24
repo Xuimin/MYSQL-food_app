@@ -9,21 +9,21 @@
         $id = $_GET['id'];
 
         if($id) {
-            $query = "SELECT food_id, isDeleted FROM favorite WHERE food_id = $id AND user_id = {$_SESSION['user_data']['id']}";
+            $query = "SELECT food_id, is_deleted FROM favorite WHERE food_id = $id AND user_id = {$_SESSION['user_data']['id']}";
             $result = mysqli_fetch_assoc(mysqli_query($cn, $query));
 
             // var_dump($result);
             // die();
 
-            if($result['food_id'] && $result['isDeleted'] == 0) {
+            if($result['food_id'] && $result['is_deleted'] == 0) {
                 $_SESSION['message'] = 'Food Already Added to Favorite';
                 $_SESSION['class'] = 'yellow lighten-3';
 
                 mysqli_close($cn);
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
             } 
-            if($result['food_id'] && $result['isDeleted'] == 1) {
-                $query = "UPDATE favorite SET isDeleted = 0 WHERE food_id = $id";
+            if($result['food_id'] && $result['is_deleted'] == 1) {
+                $query = "UPDATE favorite SET is_deleted = 0 WHERE food_id = $id";
 
                 $_SESSION['message'] = 'Food Successfully Added to Favorite';
                 $_SESSION['class'] = 'light-green lighten-3';
@@ -63,7 +63,7 @@
 
         $id = $_GET['id'];
 
-        $query = "UPDATE favorite SET isDeleted = 1 WHERE food_id = $id";
+        $query = "UPDATE favorite SET is_deleted = 1 WHERE food_id = $id";
         mysqli_query($cn, $query);
         mysqli_close($cn);
 

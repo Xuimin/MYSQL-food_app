@@ -43,7 +43,9 @@
         $comment = $request['comment'];
         $id = $request['id'];
 
-        $query = "UPDATE review SET date = '$date', time = '$time', comment = '$comment',isEdited = 1 WHERE id = $id";
+        $query = "UPDATE review SET date = '$date', time = '$time', comment = '$comment', is_edited = 1 WHERE id = $id";
+        var_dump($query);
+        // die();
         mysqli_query($cn, $query);
 
         mysqli_close($cn);

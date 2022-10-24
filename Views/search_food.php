@@ -8,7 +8,7 @@
         if(isset($_POST['search'])) {
             $keyword = $_POST['search'];
             $search_query = "SELECT * FROM foods WHERE name LIKE '%$keyword%' 
-            AND isDeleted = 0";
+            AND is_deleted = 0";
             $result = mysqli_query($GLOBALS['cn'], $search_query);
             $find_foods = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
@@ -63,7 +63,7 @@ style="margin-bottom: 30px">
                             <h5 style="display: inline"><?php echo $find['name'] ;?></h5>
                             
                             <!-- ADD TO FAV (USER) -->
-                            <?php if(isset($_SESSION['user_data']) && !$_SESSION['user_data']['isAdmin']): ?>
+                            <?php if(isset($_SESSION['user_data']) && !$_SESSION['user_data']['is_admin']): ?>
     
                                 <a href="/web.php?action=favorite&id=<?php echo $find['id']?>">
                                     <i class="tiny material-icons">favorite_border</i>
@@ -71,7 +71,7 @@ style="margin-bottom: 30px">
                                 
                                 <?php foreach($favs as $fav): ?>
                                     <?php if($fav['food_id'] == $find['id'] && $fav['user_id'] == $_SESSION['user_data']['id']) : ?>
-                                        <?php if($fav['isDeleted'] == 1): ?>
+                                        <?php if($fav['is_deleted'] == 1): ?>
                                         <a href="/web.php?action=favorite&id=<?php echo $find['id']?>">
                                             <i class="material-icons">favorite_border</i>
                                         </a> 

@@ -11,14 +11,14 @@
             header('Location: /');
         }
         
-        $query = "SELECT users.username, foods.id AS food_id, foods.name, foods.category_id, foods.isAvailable, cart.quantity, cart.totalPayment, cart.toPay , cart.id, cart.isDeleted
+        $query = "SELECT users.username, foods.id AS food_id, foods.name, foods.category_id, foods.is_available, cart.quantity, cart.total_payment, cart.to_pay , cart.id, cart.is_deleted
         FROM cart 
         JOIN users ON cart.user_id = users.id
         JOIN foods ON cart.food_id = foods.id
         WHERE user_id = {$_SESSION['user_data']['id']}
-        AND toPay = 0
-        AND foods.isAvailable = 1 
-        AND foods.isDeleted = 0";
+        AND to_pay = 0
+        AND foods.is_available = 1 
+        AND foods.is_deleted = 0";
 
         $cart_items = mysqli_fetch_all(mysqli_query($GLOBALS['cn'], $query), MYSQLI_ASSOC);
 
@@ -50,7 +50,7 @@
     method="POST">
         <ul class="collection">
             <?php foreach($cart_items as $cart_item): ?>
-                <?php if($cart_item['isDeleted'] == 0 && $cart_item['toPay'] == 0): ?>
+                <?php if($cart_item['is_deleted'] == 0 && $cart_item['to_pay'] == 0): ?>
                     <li class="collection-item col s11">
 
                         <input type="hidden" 
@@ -64,7 +64,7 @@
 
                         <?php 
                             if(isset($cart_item)) {
-                                $total += $cart_item['totalPayment']; 
+                                $total += $cart_item['total_payment']; 
                             }
                         ?>
 
@@ -77,7 +77,7 @@
                         </p>
 
                         <small> 
-                            Price: RM<?php echo $cart_item['totalPayment']; ?>
+                            Price: RM<?php echo $cart_item['total_payment']; ?>
                         </small>
                 
                         <div class="right">
@@ -107,7 +107,7 @@
     </form>
 
     <?php foreach($cart_items as $cart_item): ?>
-        <?php if($cart_item['isDeleted'] == 0 && $cart_item['toPay'] == 0): ?>
+        <?php if($cart_item['is_deleted'] == 0 && $cart_item['to_pay'] == 0): ?>
             <!-- DELETE MODAL -->
             <div class="modal bottom-sheet" 
             id="modalDel-<?php echo $cart_item['id']?>">

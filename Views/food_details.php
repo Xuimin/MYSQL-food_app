@@ -47,7 +47,7 @@
     <div class="row">
         <div class="col s12">
             <div class="card">
-                <?php if(isset($_SESSION['user_data']) && $_SESSION['user_data']['isAdmin']):?>
+                <?php if(isset($_SESSION['user_data']) && $_SESSION['user_data']['is_admin']):?>
                     <div class="card-content" 
                 style="padding: 10px; display: flex; justify-content: flex-end">
                         <!-- EDIT AND DELETE BUTTON -->
@@ -184,7 +184,7 @@
                 <!-- SHOW DETAILS -->
                 <div class="card-content">
                     <div class="right">
-                        <?php if(isset($_SESSION['user_data']) && $_SESSION['user_data']['isAdmin']): ?>
+                        <?php if(isset($_SESSION['user_data']) && $_SESSION['user_data']['is_admin']): ?>
                             <div class="switch" style="margin-bottom: 10px">
                                 <form action="../web.php"
                                 method="POST">
@@ -194,7 +194,7 @@
         
                                     <input type="hidden" name="action" value="isAvailable">
 
-                                    <?php if($food['isAvailable'] == 1): ?>
+                                    <?php if($food['is_available'] == 1): ?>
                                     <label>
                                         N/Available
                                         <input type="checkbox" name="isAvailable" checked>
@@ -203,7 +203,7 @@
                                     </label>
                                     <?php endif; ?>
 
-                                    <?php if($food['isAvailable'] == 0): ?>
+                                    <?php if($food['is_available'] == 0): ?>
                                     <label>
                                         N/Available
                                         <input type="checkbox" name="isAvailable">
@@ -219,7 +219,7 @@
                         <?php endif; ?>
 
                         <?php if($food['image'] != '/Public/'): ?>
-                            <?php if(isset($_SESSION['user_data']['id']) && $_SESSION['user_data']['isAdmin']): ?>
+                            <?php if(isset($_SESSION['user_data']['id']) && $_SESSION['user_data']['is_admin']): ?>
                                 <a href="../web.php?id=<?php echo $food['id']?>&action=delete_img">
                                     <i class="material-icons right" style="margin: 0">delete</i>
                                 </a>
@@ -250,7 +250,7 @@
                     </p><br>
 
                     <!-- ADD TO CART BUTTON -->
-                    <?php if(!$_SESSION['user_data']['isAdmin']): ?>
+                    <?php if(!$_SESSION['user_data']['is_admin']): ?>
                     <form action="../web.php" 
                     method="POST" 
                     style="margin-bottom: 0">
@@ -266,22 +266,23 @@
                         name="price" 
                         value="<?php echo $food['price'];?>">
 
-                            
-                        <div class="input-field" style="margin-bottom: 0">
-                            <input type="number"
-                            name="quantity"
-                            id="quantity"
-                            min="1"
-                            max="10"
-                            value="1"
-                            class="col s2">
-                            <label for="quantity"
-                            class="purple-text">Quantity</label>         
-                        </div>
+                            <?php if($food['is_available'] == 1 && $food['is_deleted'] == 0): ?>
+                            <div class="input-field" style="margin-bottom: 0">
+                                <input type="number"
+                                name="quantity"
+                                id="quantity"
+                                min="1"
+                                max="10"
+                                value="1"
+                                class="col s2">
+                                <label for="quantity"
+                                class="purple-text">Quantity</label>         
+                            </div>
+                        <?php endif; ?>                
 
-                        <br><br><br>
+                        <br>
 
-                        <?php if($food['isAvailable'] == 1): ?>
+                        <?php if($food['is_available'] == 1 && $food['is_deleted'] == 0): ?>
                         <button style="font-size: 2px; border: none; background-color: transparent; color: blue; margin-bottom: 0">
                             Add to Cart
                             <i class="tiny material-icons">
@@ -343,7 +344,7 @@
                             <img src="<?php echo $review['image']?>" class="circle">
                                 <?php echo $review['date'] . ' ' . $review['time']; ?>
                                 <small class="blue-text">
-                                <?php if($review['isEdited'] == 1): ?>
+                                <?php if($review['is_edited'] == 1): ?>
                                     [Edited]
                                 <?php endif; ?>
                                 </small>

@@ -33,7 +33,7 @@
         
                 <?php if(isset($_SESSION['user_data'])): ?>
         
-                    <?php if(!$_SESSION['user_data']['isAdmin']): ?>
+                    <?php if(!$_SESSION['user_data']['is_admin']): ?>
                         <li class="tab"><a href="/Views/favorite.php">Favorite</a></li>
                         <li class="tab"><a href="/Views/cart.php">Cart</a></li>
                         <li class="tab"><a href="/Views/transactions.php">Transactions</a></li>
@@ -42,7 +42,7 @@
                         <li class="tab"><a href="/Views/feedback_form.php">Give feedback</a></li>
                     <?php endif; ?>
         
-                    <?php if($_SESSION['user_data']['isAdmin']): ?>
+                    <?php if($_SESSION['user_data']['is_admin']): ?>
                         <li class="tab"><a href="/Views/all_orders.php">All Orders</a></li>
                         <li class="tab"><a href="/Views/feedback.php">View Feedback
                         </a></li>

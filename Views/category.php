@@ -6,7 +6,7 @@
         $query = "SELECT foods.*, categories.types, categories.id AS category_id
         FROM foods
         JOIN categories ON foods.category_id = categories.id
-        WHERE category_id = {$_GET['id']}";
+        WHERE category_id = {$_GET['id']} AND is_deleted = 0";
         $result = mysqli_query($cn, $query);
         $food_categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
@@ -46,7 +46,7 @@
                         </h5>
                       
                         <!-- ADD TO FAV (USER) -->
-                        <?php if(isset($_SESSION['user_data']) && !$_SESSION['user_data']['isAdmin'] == 1): ?>
+                        <?php if(isset($_SESSION['user_data']) && !$_SESSION['user_data']['is_admin'] == 1): ?>
 
                             <a href="/web.php?action=favorite&id=<?php echo $food['id']?>">
                                 <i class="tiny material-icons">favorite_border</i>
@@ -54,7 +54,7 @@
                             
                             <?php foreach($favs as $fav): ?>
                                 <?php if($fav['food_id'] == $food_category['id']): ?>
-                                    <?php if($fav['isDeleted'] == 1): ?>
+                                    <?php if($fav['is_deleted'] == 1): ?>
                                         <a href="/web.php?action=favorite&id=<?php echo $food_category['id']?>">
                                             <i class="material-icons">favorite_border</i>
                                         </a>    
@@ -80,7 +80,7 @@
                         </small>
 
                         <!-- QUANTITY -->
-                        <?php if(isset($_SESSION['user_data']) && !$_SESSION['user_data']['isAdmin']): ?>
+                        <!-- <?php if(isset($_SESSION['user_data']) && !$_SESSION['user_data']['is_admin']): ?>
                         <form action="/web.php" 
                         method="POST">
                             <input type="hidden" 
@@ -115,7 +115,7 @@
                                 </i>
                             </button>                    
                         </form>
-                        <?php endif; ?>
+                        <?php endif; ?> -->
                     </div>
 
                     <div class="right">

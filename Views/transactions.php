@@ -8,7 +8,7 @@
         }
         
         $query = "SELECT * FROM transactions
-        WHERE isDeleted = 0
+        WHERE is_deleted = 0
         AND user_id = {$_SESSION['user_data']['id']}";
         $result = mysqli_query($GLOBALS['cn'], $query);
         $transactions = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -36,7 +36,7 @@
     
     <div class="row">
         <?php foreach($transactions as $i => $transaction): ?>
-            <?php if($transaction['isPaid'] == 0): ?>
+            <?php if($transaction['is_paid'] == 0): ?>
             <div class="card-panel"
             style="background-color: rgba(252, 212, 137, 0.582)">
                 <h5><u>Waiting for payment</u></h5>
@@ -81,7 +81,7 @@
             <div class="card-panel"
             style="background-color: rgba(253, 253, 190, 0.637)">
                 <h3>All Payment Done</h3>
-                <a>Back to homepage</a>
+                <a href="/">Back to homepage</a>
             </div>
         <?php endif; ?>
         <?php endforeach; ?>

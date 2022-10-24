@@ -4,11 +4,11 @@
 
     function get_content() {
         
-        $query = "SELECT orders.*, orders.id AS order_id, transactions.*, status.id AS status_id, status.foodStatus, users.id, users.username
+        $query = "SELECT orders.*, orders.id AS order_id, transactions.*, status.id AS status_id, status.food_status, users.id, users.username
         FROM orders
         JOIN users ON orders.user_id = users.id
         JOIN transactions ON orders.transaction_id = transactions.id
-        JOIN status ON orders.foodStatus_id = status.id
+        JOIN status ON orders.food_status_id = status.id
         WHERE users.id = {$_SESSION['user_data']['id']}
         ORDER BY orders.id DESC";
         $result = mysqli_query($GLOBALS['cn'], $query);
@@ -51,17 +51,17 @@
                     <div style="margin: 20px">
                         <p class="center-align 
                         <?php 
-                        if($item['foodStatus_id'] == 1) {
+                        if($item['food_status_id'] == 1) {
                             echo 'red lighten-3';
-                        } elseif($item['foodStatus_id'] == 2) {
+                        } elseif($item['food_status_id'] == 2) {
                             echo 'orange lighten-3';
-                        } elseif($item['foodStatus_id'] == 3) {
+                        } elseif($item['food_status_id'] == 3) {
                             echo 'yellow lighten-3';
                         } else {
                             echo 'green lighten-3';
                         }
                         ?>" 
-                        style="border: 1px dotted black; margin: 0 0 10px 0; padding: 5px"><?php echo $item['foodStatus'] ?></p>
+                        style="border: 1px dotted black; margin: 0 0 10px 0; padding: 5px"><?php echo $item['food_status'] ?></p>
                     </div>
                 </div>
             </div>

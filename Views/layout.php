@@ -38,14 +38,14 @@
         
         <div class="container">
             <?php if(isset($_SESSION['user_data'])): ?>
-                <h6 style="position: absolute; top: 105px">
+                <h6 style="position: absolute; top: 125px">
                     <?php require_once 'Template/user_info.php'; ?>
     
                     <?php echo $_SESSION['user_data']['username']; ?>
                 </h6>
 
             <?php else: ?>
-                <?php echo '<h6 style="position: absolute; top: 105px">Please login/create an account</h6>'?>
+                <?php echo '<h6 style="position: absolute; top: 125px">Please login/create an account</h6>'?>
 
             <?php endif; ?>
 
